@@ -8,7 +8,10 @@
     "emitDecoratorMetadata": true,
     "outDir": "./dist",
     "types": ["node", "jest"], // or ["node", "mocha"]
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      "apps/api-gateway/src/*": ["apps/api-gateway/src/*"]
+    }
   },
   "include": ["src/**/*"]
 }

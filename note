@@ -106,3 +106,8 @@ If you want to stop the services, you can use the following commands in the term
 
 - Ensure that the commands are executed in the directory where Kafka was extracted.
 - If you encounter any issues during this process, feel free to ask for further assistance!
+
+
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+

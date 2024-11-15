@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
-import { CreateOrderDto } from './app.dto';
+
 
 @Controller()
 export class AppController {
@@ -12,7 +12,7 @@ export class AppController {
   }
 
   @Post()
-  createOrderEvent(@Body() payload: CreateOrderDto) {
+  createOrderEvent(@Body() payload: any) {
     return this.appService.createOrder(payload);
   }
 }

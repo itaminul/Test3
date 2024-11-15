@@ -1,6 +1,6 @@
 import { Controller, Get } from "@nestjs/common";
 import { BillingAppService } from "./billing-app.service";
-import { EventPattern } from "@nestjs/microservices";
+import { EventPattern, MessagePattern, Payload } from "@nestjs/microservices";
 
 @Controller()
 export class BillingAppController {
@@ -14,6 +14,16 @@ export class BillingAppController {
   @EventPattern("order_created")
   handleOrderCreatred(data: any) {
     console.log(data);
-    this.billingAppService.handleOrderCreated(data);
+    this.billingAppService.handleOrderCreated(data.value);
+  }
+
+  @MessagePattern("billing.create-invoice")
+  async createInvoice(@Payload() data: { userId: string; amount: number }) {
+    return this.billingAppService.createInvoice(data);
+  }
+
+  @MessagePattern("billing.get-invoice")
+  async getInvoice(@Payload() id: string) {
+    return this.billingAppService.getInvoice(id);
   }
 }

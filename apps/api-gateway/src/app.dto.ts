@@ -1,5 +1,7 @@
-export class CreateOrderDto {
-  id: string;
-  name: string;
-  price: number;
+class CreateOrderDto {
+  constructor(
+    public id: string | undefined,
+    public name: string | undefined,
+    public price: number | undefined
+  ) {}
 }

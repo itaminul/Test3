@@ -1,8 +1,23 @@
-import { NestFactory } from '@nestjs/core';
-import { AuthAppModule } from './auth-app.module';
+import { NestFactory } from "@nestjs/core";
+import { MicroserviceOptions, Transport } from "@nestjs/microservices";
+import { AuthAppModule } from "./auth-app.module";
+
 
 async function bootstrap() {
-  const app = await NestFactory.create(AuthAppModule);
-  await app.listen(process.env.port ?? 3003);
+  const app = await NestFactory.createMicroservice<MicroserviceOptions>(
+    AuthAppModule,
+    {
+      transport: Transport.KAFKA,
+      options: {
+        client: {
+          brokers: ["127.0.0.1:9092"],
+        },
+        consumer: {
+          groupId: "auth-consumer",
+        },
+      },
+    }
+  );
+  await app.listen();
 }
 bootstrap();
